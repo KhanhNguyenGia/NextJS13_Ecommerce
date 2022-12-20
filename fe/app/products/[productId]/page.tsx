@@ -3,6 +3,7 @@ import { formatPrice } from '../../../utils/utils';
 import Slider from '../../../components/slider/slider.component';
 import Quantity from './quantity.component';
 import CommentSection from './comment-section.component';
+import { faker } from '@faker-js/faker';
 
 export interface IProductPageProps {
 	params: {
@@ -11,8 +12,29 @@ export interface IProductPageProps {
 }
 
 export async function getProduct(productId: string) {
-	const res = await fetch(`http://localhost:3000/api/products/${productId}`);
-	return await res.json();
+	// const res = await fetch(`http://localhost:3000/api/products/${productId}`);
+	// return await res.json();
+	const product: IProductExtended = {
+		id: productId,
+		name: faker.commerce.productName(),
+		description: faker.commerce.productDescription(),
+		price: faker.commerce.price(1, 200, 2),
+		images: Array.from(Array(3)).map((_, i) => ({
+			src: faker.image.imageUrl(900, 450, 'fashion', true),
+			alt: faker.commerce.productAdjective(),
+		})),
+		ratings: {
+			overall: faker.commerce.price(0, 5, 2, 'Star '),
+			count: Number(faker.random.numeric(3)),
+		},
+		comments: Array.from(Array(3)).map((_, i) => ({
+			user: faker.name.firstName(),
+			rating: faker.commerce.price(0, 5, 2, 'Star '),
+			profile: faker.image.imageUrl(50, 50, 'people', true),
+			comment: faker.lorem.paragraph(),
+		})),
+	};
+	return product;
 }
 
 const ProductPage = async ({ params: { productId } }: IProductPageProps) => {
