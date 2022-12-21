@@ -1,21 +1,22 @@
-import { randomUUID } from 'crypto';
+import { IProduct } from '../../../interface/product.interface';
 import ProductCard from '../../../components/product-card/product-card.component';
-import { IProduct } from '../../../pages/api/products';
-import { faker } from '@faker-js/faker';
+import Product from '../../../model/product.model';
+import dbConnect from '../../../utils/mongodb/mongodb.utils';
 
-const getProducts = async () => {
-	// const res = await fetch('/api/products');
-	// return await res.json();
-	const products: IProduct[] = Array.from(Array(6)).map((_, i) => ({
-		id: randomUUID(),
-		name: faker.commerce.productName(),
-		description: faker.commerce.productDescription(),
-		price: faker.commerce.price(1, 200, 2),
-		images: Array.from(Array(3)).map((_, i) => ({
-			src: faker.image.imageUrl(300, 300, 'fashion', true),
-			alt: faker.commerce.productAdjective(),
-		})),
-	}));
+export const getProducts = async () => {
+	await dbConnect();
+	const result = await Product.find({}).limit(6);
+	const products = result.map((doc) => {
+		const product = doc.toObject();
+		product._id = product._id.toString();
+		product.images = product.images.map((image: any) => ({ ...image, _id: image._id.toString() }));
+		product.ratings = { ...product.ratings, _id: product.ratings._id.toString() };
+		product.comments = product.comments.map((comment: any) => ({
+			...comment,
+			_id: comment._id.toString(),
+		}));
+		return product;
+	});
 	return products;
 };
 
@@ -28,10 +29,10 @@ const ProductsPage = async () => {
 				<ProductCard
 					title={product.name}
 					image={product.images}
-					key={product.id}
+					key={product._id}
 					description={product.description}
 					price={product.price}
-					id={product.id}
+					id={product._id}
 				/>
 			))}
 		</div>

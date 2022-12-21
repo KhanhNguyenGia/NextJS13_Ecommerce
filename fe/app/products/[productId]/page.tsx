@@ -1,9 +1,12 @@
-import { IProductExtended } from '../../../pages/api/products/[productId]';
+import { faker } from '@faker-js/faker';
+import dbConnect from '../../../utils/mongodb/mongodb.utils';
 import { formatPrice } from '../../../utils/utils';
+import Product from '../../../model/product.model';
 import Slider from '../../../components/slider/slider.component';
 import Quantity from './quantity.component';
 import CommentSection from './comment-section.component';
-import { faker } from '@faker-js/faker';
+import { IProduct } from '../../../interface/product.interface';
+import mongoose from 'mongoose';
 
 export interface IProductPageProps {
 	params: {
@@ -11,11 +14,50 @@ export interface IProductPageProps {
 	};
 }
 
-export async function getProduct(productId: string) {
-	// const res = await fetch(`http://localhost:3000/api/products/${productId}`);
-	// return await res.json();
-	const product: IProductExtended = {
-		id: productId,
+// export const getProducts = async () => {
+// 	await dbConnect();
+// 	console.log('Connected to DB');
+// 	const result = await Product.find({}).limit(6);
+// 	const products = result.map((doc) => {
+// 		const product = doc.toObject();
+// 		product._id = product._id.toString();
+// 		product.images = product.images.map((image: any) => ({ ...image, _id: image._id.toString() }));
+// 		product.ratings = { ...product.ratings, _id: product.ratings._id.toString() };
+// 		product.comments = product.comments.map((comment: any) => ({
+// 			...comment,
+// 			_id: comment._id.toString(),
+// 		}));
+// 		return product;
+// 	});
+// 	return products;
+// };
+
+// // Generate static params for dynamic routes
+// export async function generateStaticParams() {
+// 	const products: IProduct[] = await getProducts();
+// 	return products.map((product) => ({
+// 		productId: product._id.toString(),
+// 	}));
+// }
+
+// export const getProductById = async (productId: string) => {
+// 	console.log(productId);
+
+// 	// await dbConnect();
+// 	return new Promise<IProduct>((resolve, reject) => {
+// 		mongoose.connect(process.env.MONGODB_URI as string, () => {
+// 			console.log('Connected to DB');
+// 			Product.findById(productId, (err: Error, product: IProduct) => {
+// 				if (err) reject(err);
+// 				resolve(product);
+// 			});
+// 		});
+// 	});
+// };
+
+export const getProductById = async (productId: string) => {
+	const product: IProduct = {
+		_id: productId,
 		name: faker.commerce.productName(),
 		description: faker.commerce.productDescription(),
 		price: faker.commerce.price(1, 200, 2),
@@ -35,11 +77,10 @@ export async function getProduct(productId: string) {
 		})),
 	};
 	return product;
-}
+};
 
 const ProductPage = async ({ params: { productId } }: IProductPageProps) => {
-	const product: IProductExtended = await getProduct(productId);
-
+	const product = await getProductById(productId);
 	return (
 		<div className='flex gap-5 flex-col'>
 			<div className='flex gap-5 flex-col md:flex-row'>
@@ -62,6 +103,7 @@ const ProductPage = async ({ params: { productId } }: IProductPageProps) => {
 			</div>
 			<CommentSection comments={product.comments} />
 		</div>
+		// <div>{productId}</div>
 	);
 };
 

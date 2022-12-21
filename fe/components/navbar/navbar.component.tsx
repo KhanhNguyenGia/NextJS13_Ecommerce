@@ -11,7 +11,7 @@ const NavBar = () => {
 				<div className='flex gap-10 text-orange-400 font-semibold'>
 					<Link
 						className='relative before:absolute before:h-[2px] before:top-full before:scale-0 hover:before:scale-100 before:transition-transform before:w-full before:bg-orange-400'
-						href='/about'
+						href='/'
 					>
 						About
 					</Link>
@@ -30,7 +30,7 @@ const NavBar = () => {
 				</div>
 				<div className='flex'>
 					<div>Profile</div>
-					<Link href='/register'>
+					<Link href='/'>
 						<Button type='button'>Sign up</Button>
 					</Link>
 				</div>

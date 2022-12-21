@@ -21,7 +21,7 @@ const HomePage = () => {
 			<div className='flex flex-wrap w-full'>
 				{PRODUCT_ARRAY.map(({ image, title, id }, index) => (
 					<ProductCard
-						id={id}
+						id={'/'}
 						image={[image]}
 						key={`${image}_product_card_${index}`}
 						title={title}
