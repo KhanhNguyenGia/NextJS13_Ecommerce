@@ -1,9 +1,9 @@
 import { FC } from 'react';
-import { IComment } from '../../../pages/api/products/[productId]';
 import Image from 'next/image';
 import Button from '../../../components/button/button.component';
+import { ProductComment } from '../../../interface/product.interface';
 
-const Comment: FC<IComment> = ({ comment, profile, user, rating }) => (
+const Comment: FC<ProductComment> = ({ comment, profile, user, rating }) => (
 	<div className='p-5 flex-auto md:flex-none md:basis-1/2 h-full'>
 		<div className='bg-white p-5 flex shadow-md rounded-lg flex-col gap-3'>
 			<div className='flex gap-3 items-center'>
@@ -19,7 +19,7 @@ const Comment: FC<IComment> = ({ comment, profile, user, rating }) => (
 );
 
 export interface ICommentSectionProps {
-	comments: IComment[];
+	comments: ProductComment[];
 }
 
 const CommentSection: FC<ICommentSectionProps> = ({ comments }) => {
