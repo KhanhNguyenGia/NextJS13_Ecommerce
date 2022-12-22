@@ -1,12 +1,10 @@
-import { faker } from '@faker-js/faker';
-import dbConnect from '../../../utils/mongodb/mongodb.utils';
+import mongoose from 'mongoose';
 import { formatPrice } from '../../../utils/utils';
 import Product from '../../../model/product.model';
 import Slider from '../../../components/slider/slider.component';
 import Quantity from './quantity.component';
 import CommentSection from './comment-section.component';
 import { IProduct } from '../../../interface/product.interface';
-import mongoose from 'mongoose';
 
 export interface IProductPageProps {
 	params: {
@@ -14,70 +12,61 @@ export interface IProductPageProps {
 	};
 }
 
-// export const getProducts = async () => {
-// 	await dbConnect();
-// 	console.log('Connected to DB');
-// 	const result = await Product.find({}).limit(6);
-// 	const products = result.map((doc) => {
-// 		const product = doc.toObject();
-// 		product._id = product._id.toString();
-// 		product.images = product.images.map((image: any) => ({ ...image, _id: image._id.toString() }));
-// 		product.ratings = { ...product.ratings, _id: product.ratings._id.toString() };
-// 		product.comments = product.comments.map((comment: any) => ({
-// 			...comment,
-// 			_id: comment._id.toString(),
-// 		}));
-// 		return product;
-// 	});
-// 	return products;
-// };
-
-// // Generate static params for dynamic routes
-// export async function generateStaticParams() {
-// 	const products: IProduct[] = await getProducts();
-// 	return products.map((product) => ({
-// 		productId: product._id.toString(),
-// 	}));
-// }
-
-// export const getProductById = async (productId: string) => {
-// 	console.log(productId);
-
-// 	// await dbConnect();
-// 	return new Promise<IProduct>((resolve, reject) => {
-// 		mongoose.connect(process.env.MONGODB_URI as string, () => {
-// 			console.log('Connected to DB');
-// 			Product.findById(productId, (err: Error, product: IProduct) => {
-// 				if (err) reject(err);
-// 				resolve(product);
-// 			});
-// 		});
-// 	});
-// };
+export const getProducts = async () => {
+	return new Promise<IProduct[]>((resolve, reject) => {
+		mongoose.connect(process.env.MONGODB_URI as string, async () => {
+			mongoose.set('strictQuery', false);
+			const result = await Product.find({});
+			const products = result.map((doc) => {
+				const product = doc.toObject();
+				product._id = product._id.toString();
+				product.images = product.images.map((image: any) => ({
+					...image,
+					_id: image._id.toString(),
+				}));
+				product.ratings = { ...product.ratings, _id: product.ratings._id.toString() };
+				product.comments = product.comments.map((comment: any) => ({
+					...comment,
+					_id: comment._id.toString(),
+				}));
+				return product;
+			});
+			resolve(products);
+		});
+	});
+};
 
 export const getProductById = async (productId: string) => {
-	const product: IProduct = {
-		_id: productId,
-		name: faker.commerce.productName(),
-		description: faker.commerce.productDescription(),
-		price: faker.commerce.price(1, 200, 2),
-		images: Array.from(Array(3)).map((_, i) => ({
-			src: faker.image.imageUrl(900, 450, 'fashion', true),
-			alt: faker.commerce.productAdjective(),
-		})),
-		ratings: {
-			overall: faker.commerce.price(0, 5, 2, 'Star '),
-			count: Number(faker.random.numeric(3)),
-		},
-		comments: Array.from(Array(3)).map((_, i) => ({
-			user: faker.name.firstName(),
-			rating: faker.commerce.price(0, 5, 2, 'Star '),
-			profile: faker.image.imageUrl(50, 50, 'people', true),
-			comment: faker.lorem.paragraph(),
-		})),
-	};
-	return product;
+	return new Promise<IProduct>((resolve, reject) => {
+		mongoose.connect(process.env.MONGODB_URI as string, async () => {
+			mongoose.set('strictQuery', false);
+			const result = await Product.findById(productId);
+			const product = result.toObject();
+			product._id = product._id.toString();
+			product.images = product.images.map((image: any) => ({
+				...image,
+				_id: image._id.toString(),
+			}));
+			product.ratings = { ...product.ratings, _id: product.ratings._id.toString() };
+			product.comments = product.comments.map((comment: any) => ({
+				...comment,
+				_id: comment._id.toString(),
+			}));
+			resolve(product);
+		});
+	});
 };
+
+// equivalent of generateStaticPaths
+// export const dynamicParams = true; is the default, allowing pages to be generate on demand
+// export const dynamicParams = false; will throw 404 for pages that are not generated
+export async function generateStaticParams() {
+	const products = await getProducts();
+
+	return products.map((product) => ({
+		productId: product._id,
+	}));
+}
 
 const ProductPage = async ({ params: { productId } }: IProductPageProps) => {
 	const product = await getProductById(productId);
