@@ -12,7 +12,7 @@ export interface IProductPageProps {
 	};
 }
 
-export const getProducts = async () => {
+const getProducts = async () => {
 	return new Promise<IProduct[]>((resolve, reject) => {
 		mongoose.connect(process.env.MONGODB_URI as string, async () => {
 			mongoose.set('strictQuery', false);
@@ -36,7 +36,7 @@ export const getProducts = async () => {
 	});
 };
 
-export const getProductById = async (productId: string) => {
+const getProductById = async (productId: string) => {
 	return new Promise<IProduct>((resolve, reject) => {
 		mongoose.connect(process.env.MONGODB_URI as string, async () => {
 			mongoose.set('strictQuery', false);

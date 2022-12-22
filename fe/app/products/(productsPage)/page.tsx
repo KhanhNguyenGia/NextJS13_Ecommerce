@@ -3,7 +3,7 @@ import { IProduct } from '../../../interface/product.interface';
 import ProductCard from '../../../components/product-card/product-card.component';
 import Product from '../../../model/product.model';
 
-export const getProducts = async () => {
+const getProducts = async () => {
 	return new Promise<IProduct[]>((resolve, reject) => {
 		mongoose.connect(process.env.MONGODB_URI as string, async () => {
 			mongoose.set('strictQuery', false);
