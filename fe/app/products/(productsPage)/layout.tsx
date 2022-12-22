@@ -12,7 +12,9 @@ const ProductsLayout: FC<IProductLayoutProps> = ({ children }) => {
 				<form>Aside</form>
 			</aside>
 			<main className='flex-[7] flex flex-col gap-5'>
-				<BreadCrumbs path={['Products']} />
+				<div className='px-5'>
+					<BreadCrumbs path={['Products']} />
+				</div>
 				{children}
 			</main>
 		</div>

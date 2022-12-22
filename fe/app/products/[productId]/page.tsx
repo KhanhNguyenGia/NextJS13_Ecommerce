@@ -5,6 +5,7 @@ import Slider from '../../../components/slider/slider.component';
 import Quantity from './quantity.component';
 import CommentSection from './comment-section.component';
 import { IProduct } from '../../../interface/product.interface';
+import { StarIconFilled, StarIconOutlined } from '../../../assets/icon';
 
 export interface IProductPageProps {
 	params: {
@@ -72,17 +73,25 @@ const ProductPage = async ({ params: { productId } }: IProductPageProps) => {
 	const product = await getProductById(productId);
 	return (
 		<div className='flex gap-5 flex-col'>
-			<div className='flex gap-5 flex-col md:flex-row'>
+			<div className='flex gap-5 flex-col md:flex-row px-5'>
 				<div className='flex-[6] flex flex-col'>
-					<Slider images={product.images} showNav />
+					<Slider images={product.images} showNav height='h-full' />
 				</div>
 				{/* Note switch to form in the future, because NextJS 13 is fun */}
-				<div className='flex-[2] flex flex-col'>
+				<div className='flex-[2] flex flex-col bg-white rounded-lg shadow-md p-5'>
 					<h2 className='text-2xl font-bold'>{product.name}</h2>
 					{/* star icon */}
 					<div className='flex gap-2 text-sm text-gray-500'>
-						<span>{product.ratings.overall} / 5</span>
-						<span>({product.ratings.count})</span>
+						<div className='flex gap-2 text-yellow-500 items-center'>
+							{Array.from(Array(5)).map((_, i) =>
+								i <= Math.round(Number(product.ratings.overall)) ? (
+									<StarIconFilled key={`stars_${i}`} sizes='w-7 h-7' />
+								) : (
+									<StarIconOutlined key={`stars_${i}`} sizes='w-7 h-7' />
+								)
+							)}{' '}
+							<div className='text-gray-500 flex items-center'>({product.ratings.count})</div>
+						</div>
 					</div>
 
 					<p className='mt-2 mb-5'>{product.description}</p>

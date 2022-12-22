@@ -40,6 +40,7 @@ const ProductsPage = async () => {
 					description={product.description}
 					price={product.price}
 					id={product._id}
+					ratings={product.ratings}
 				/>
 			))}
 		</div>

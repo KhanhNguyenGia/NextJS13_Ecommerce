@@ -10,8 +10,10 @@ export interface IProductLayoutProps {
 
 const ProductLayout: FC<IProductLayoutProps> = ({ children, params: { productId } }) => {
 	return (
-		<div className='flex flex-col max-w-7xl p-5 m-auto gap-3'>
-			<BreadCrumbs path={['Products', productId]} />
+		<div className='flex flex-col max-w-7xl py-5 m-auto gap-3'>
+			<div className='px-5'>
+				<BreadCrumbs path={['Products', productId]} />
+			</div>
 			{children}
 		</div>
 	);
