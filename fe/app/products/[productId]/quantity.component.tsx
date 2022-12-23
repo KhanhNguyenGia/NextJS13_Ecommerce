@@ -20,14 +20,14 @@ const Quantity = ({ price }: { price: string }) => {
 					<option value='2XL'>2XL</option>
 				</select>
 			</div>
-			<div className='flex gap-3 justify-center'>
+			<div className='flex gap-3 justify-center font-bold'>
 				<Button
 					type='button'
 					role='primary'
 					onClick={() => setQuantity((prev) => Math.max(prev - 1, 1))}
 					// onClick={() => (quantity.current = Math.max(quantity.current - 1, 1))}
 				>
-					&lt;
+					-
 				</Button>
 				<input
 					className='px-5 py-1 text-center border-2 border-orange-400 rounded-lg flex-auto focus:border-orange-500 outline-none'
@@ -45,7 +45,7 @@ const Quantity = ({ price }: { price: string }) => {
 					onClick={() => setQuantity((prev) => Math.min(prev + 1, 10))}
 					// onClick={() => (quantity.current = Math.min(quantity.current + 1, 10))}
 				>
-					&gt;
+					+
 				</Button>
 			</div>
 			<Button type='button' role='primary' variant='filled'>

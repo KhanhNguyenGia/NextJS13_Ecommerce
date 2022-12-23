@@ -39,7 +39,7 @@ const HomePage = async () => {
 	return (
 		<div className='m-auto py-5 max-w-7xl flex flex-col gap-5'>
 			<div className='px-5 flex flex-col gap-5'>
-				<Slider images={IMAGE_ARRAY} showNav />
+				<Slider images={IMAGE_ARRAY} showNav rounded />
 				<h2 className='font-semibold text-2xl'>Title 1</h2>
 			</div>
 			<div className='flex flex-wrap'>

@@ -12,6 +12,7 @@ export interface ISliderProps {
 	showNav?: boolean;
 	height?: string;
 	animateOnHover?: boolean;
+	rounded?: boolean;
 }
 
 const Slider: FC<ISliderProps> = ({
@@ -19,6 +20,7 @@ const Slider: FC<ISliderProps> = ({
 	showNav = false,
 	height = 'h-[50vmin]',
 	animateOnHover = false,
+	rounded = false,
 }) => {
 	const [current, setCurrent] = useState(0);
 
@@ -31,7 +33,7 @@ const Slider: FC<ISliderProps> = ({
 	};
 
 	return (
-		<div className={`relative w-full ${height} overflow-hidden rounded-lg group`}>
+		<div className={`relative w-full ${height} overflow-hidden ${rounded && 'rounded-lg'} group`}>
 			{images.length > 1 && (
 				<div
 					className='absolute top-1/2 -translate-y-1/2 left-3 z-10 border-[12px] border-transparent border-r-white/80 cursor-pointer hover:border-r-white'

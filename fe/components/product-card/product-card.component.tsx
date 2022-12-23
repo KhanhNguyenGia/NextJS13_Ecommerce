@@ -21,10 +21,10 @@ export interface IProductCardProps {
 export const SkeletonProductCard = () => {
 	return (
 		<div className='p-5 flex-auto md:flex-none md:basis-1/2 lg:basis-1/3'>
-			<div className='bg-white rounded-lg shadow-md p-5 group transition-transform flex flex-col h-full'>
+			<div className='bg-white rounded-lg shadow-md group transition-transform flex flex-col h-full overflow-hidden'>
 				<div className='animate-pulse'>
-					<div className='w-full h-64 overflow-hidden rounded-lg bg-gray-300'></div>
-					<div className='mt-5 flex-col flex-1 flex'>
+					<div className='w-full h-64 overflow-hidden bg-gray-300'></div>
+					<div className='p-5 flex-col flex-1 flex'>
 						<h3 className='h-4 bg-gray-300 max-w-[50%] rounded-md'></h3>
 						<p className='mt-2 mb-1 bg-gray-300 h-4 rounded-md'></p>
 						<p className='my-1 bg-gray-300 h-4 rounded-md'></p>
@@ -45,9 +45,9 @@ export const SkeletonProductCard = () => {
 const ProductCard: FC<IProductCardProps> = ({ id, image, title, description, price, ratings }) => {
 	return (
 		<div className='p-5 flex-auto md:flex-none md:basis-1/2 lg:basis-1/3'>
-			<div className='bg-white rounded-lg shadow-md p-5 group hover:scale-105 transition-transform flex flex-col h-full'>
+			<div className='bg-white rounded-lg shadow-md group hover:scale-105 transition-transform flex flex-col h-full overflow-hidden'>
 				{image && <Slider images={image} height='h-64' animateOnHover={true} />}
-				<div className='mt-5 flex-col flex-1 flex'>
+				<div className='p-5 flex-col flex-1 flex'>
 					<Link href={`/products/${id}`}>
 						<h3 className='text-lg font-semibold text-orange-500'>{title}</h3>
 					</Link>
