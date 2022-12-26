@@ -2,9 +2,9 @@
 
 import { FC, useState } from 'react';
 import Image from 'next/image';
-import Button from '../../../components/button/button.component';
-import { ProductComment } from '../../../interface/product.interface';
-import { StarIconFilled, StarIconOutlined } from '../../../assets/icon';
+import Button from '@components/button/button.component';
+import { ProductComment } from '@interface/product.interface';
+import { StarIconFilled, StarIconOutlined } from '@assets/icon';
 
 const Comment: FC<ProductComment> = ({ comment, profile, user, rating }) => (
 	<div className='p-5 flex-auto md:flex-none md:basis-1/2 h-full'>

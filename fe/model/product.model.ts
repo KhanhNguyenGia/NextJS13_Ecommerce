@@ -11,7 +11,7 @@ export const ProductSchema = new mongoose.Schema({
 	},
 	price: {
 		require: true,
-		type: String,
+		type: Number,
 	},
 	images: {
 		require: true,
@@ -19,11 +19,11 @@ export const ProductSchema = new mongoose.Schema({
 	},
 	ratings: {
 		require: true,
-		type: { overall: String, count: Number },
+		type: { overall: Number, count: Number },
 	},
 	comments: {
 		require: true,
-		type: [{ user: String, comment: String, rating: String, profile: String }],
+		type: [{ user: String, comment: String, rating: Number, profile: String }],
 	},
 });
 

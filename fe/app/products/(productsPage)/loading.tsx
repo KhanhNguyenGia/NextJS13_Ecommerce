@@ -1,5 +1,5 @@
-import { SkeletonProductCard } from '../../../components/product-card/product-card.component';
-import Spinner from '../../../components/spinner/spinner.component';
+import { SkeletonProductCard } from '@components/product-card/product-card.component';
+import Spinner from '@components/spinner/spinner.component';
 
 const Loading = () => {
 	return (

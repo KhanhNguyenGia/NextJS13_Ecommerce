@@ -1,5 +1,4 @@
-import NavBar from '../components/navbar/navbar.component';
-import Spinner from '../components/spinner/spinner.component';
+import NavBar from '@components/navbar/navbar.component';
 
 import '../styles/globals.css';
 

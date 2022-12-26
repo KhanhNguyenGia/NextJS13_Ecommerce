@@ -1,10 +1,10 @@
 import Link from 'next/link';
 import { FC } from 'react';
-import Button from '../button/button.component';
-import Slider from '../slider/slider.component';
-import { formatPrice } from '../../utils/utils';
-import { ProductRating } from '../../interface/product.interface';
-import { StarIconFilled, StarIconOutlined } from '../../assets/icon';
+import Button from '@components/button/button.component';
+import Slider from '@components/slider/slider.component';
+import { formatPrice } from '@utils/utils';
+import { ProductRating } from '@interface/product.interface';
+import { StarIconFilled, StarIconOutlined } from '@assets/icon';
 
 export interface IProductCardProps {
 	image?: {
@@ -13,14 +13,14 @@ export interface IProductCardProps {
 	}[];
 	title: string;
 	description?: string;
-	price?: string;
+	price?: string | number;
 	id: string;
 	ratings?: ProductRating;
 }
 
 export const SkeletonProductCard = () => {
 	return (
-		<div className='p-5 flex-auto md:flex-none md:basis-1/2 lg:basis-1/3'>
+		<div className='p-5 w-full md:w-1/2 lg:w-1/3'>
 			<div className='bg-white rounded-lg shadow-md group transition-transform flex flex-col h-full overflow-hidden'>
 				<div className='animate-pulse'>
 					<div className='w-full h-64 overflow-hidden bg-gray-300'></div>

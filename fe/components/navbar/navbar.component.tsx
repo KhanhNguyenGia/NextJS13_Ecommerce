@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import Button from '../button/button.component';
+import Button from '@components/button/button.component';
 
 const NavBar = () => {
 	return (

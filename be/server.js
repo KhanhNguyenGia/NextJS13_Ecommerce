@@ -15,7 +15,7 @@ const ProductSchema = new mongoose.Schema({
 	},
 	price: {
 		require: true,
-		type: String,
+		type: Number,
 	},
 	images: {
 		require: true,
@@ -23,11 +23,11 @@ const ProductSchema = new mongoose.Schema({
 	},
 	ratings: {
 		require: true,
-		type: { overall: String, count: Number },
+		type: { overall: Number, count: Number },
 	},
 	comments: {
 		require: true,
-		type: [{ user: String, comment: String, rating: String, profile: String }],
+		type: [{ user: String, comment: String, rating: Number, profile: String }],
 	},
 });
 
@@ -60,18 +60,18 @@ app.get('/generate', (req, res) => {
 		const product = {
 			name: faker.commerce.productName(),
 			description: faker.commerce.productDescription(),
-			price: faker.commerce.price(1, 200, 2),
+			price: Number(faker.commerce.price(1, 200, 2)),
 			images: Array.from(Array(3)).map((_, i) => ({
 				src: faker.image.imageUrl(900, 450, 'fashion', true),
 				alt: faker.commerce.productAdjective(),
 			})),
 			ratings: {
-				overall: faker.commerce.price(0, 5, 2),
+				overall: Number(faker.commerce.price(0, 5, 2)),
 				count: Number(faker.random.numeric(3)),
 			},
 			comments: Array.from(Array(3)).map((_, i) => ({
 				user: faker.name.firstName(),
-				rating: faker.commerce.price(0, 5, 2),
+				rating: Number(faker.commerce.price(0, 5, 2)),
 				profile: faker.image.imageUrl(50, 50, 'people', true),
 				comment: faker.lorem.paragraph(),
 			})),

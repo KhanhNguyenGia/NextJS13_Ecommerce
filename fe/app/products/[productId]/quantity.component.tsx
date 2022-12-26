@@ -1,16 +1,16 @@
 'use client';
 
 import { useState } from 'react';
-import Button from '../../../components/button/button.component';
-import { formatPrice } from '../../../utils/utils';
+import Button from '@components/button/button.component';
+import { formatPrice } from '@utils/utils';
 
-const Quantity = ({ price }: { price: string }) => {
+const Quantity = ({ price }: { price: string | number }) => {
 	const [quantity, setQuantity] = useState(1);
 	const [sizes, setSizes] = useState('S');
 
 	return (
-		<div className='flex gap-5 my-5 justify-center md:flex-col'>
-			<div className='md:w-max rounded-lg border-2 border-orange-400 px-2 py-1 focus-within:border-orange-500 h-10'>
+		<div className='flex gap-5 my-5 justify-center flex-col sm:flex-row md:flex-col'>
+			<div className='w-max sm:w-auto md:w-max rounded-lg border-2 border-orange-400 px-2 py-1 focus-within:border-orange-500 h-10'>
 				<select name='size' id='size' className='h-full w-16 outline-none peer'>
 					<option value='XS'>XS</option>
 					<option value='S'>S</option>

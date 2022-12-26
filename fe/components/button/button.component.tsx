@@ -34,11 +34,12 @@ const TransparentButton: FC<IButtonProps> = ({
 	children,
 	role = 'primary',
 	disabled = false,
+	className = '',
 	...rest
 }) => {
 	return (
 		<button
-			className={`${BASE_VARIANT} ${TEXT_VARIANTS[role]} ${HOVER_VARIANTS[role]} hover:text-white`}
+			className={`${BASE_VARIANT} ${TEXT_VARIANTS[role]} ${HOVER_VARIANTS[role]} hover:text-white ${className}`}
 			disabled={disabled}
 			{...rest}
 		>
@@ -51,11 +52,13 @@ const FilledButton: FC<IButtonProps> = ({
 	children,
 	role = 'primary',
 	disabled = false,
+	className = '',
+
 	...rest
 }) => {
 	return (
 		<button
-			className={`${BASE_VARIANT} ${BACKGROUND_VARIANTS[role]} ${HOVER_VARIANTS[role]} text-white`}
+			className={`${BASE_VARIANT} ${BACKGROUND_VARIANTS[role]} ${HOVER_VARIANTS[role]} text-white ${className}`}
 			disabled={disabled}
 			{...rest}
 		>
@@ -74,11 +77,12 @@ const OutlinedButton: FC<IButtonProps> = ({
 	children,
 	role = 'primary',
 	disabled = false,
+	className = '',
 	...rest
 }) => {
 	return (
 		<button
-			className={`${BASE_VARIANT} ${OUTLINED_VARIANTS[role]} ${HOVER_VARIANTS[role]} border-2 hover:text-white`}
+			className={`${BASE_VARIANT} ${OUTLINED_VARIANTS[role]} ${HOVER_VARIANTS[role]} border-2 hover:text-white ${className}`}
 			disabled={disabled}
 			{...rest}
 		>

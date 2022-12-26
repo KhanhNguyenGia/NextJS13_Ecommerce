@@ -19,7 +19,7 @@ export interface IProduct {
 	_id: string;
 	name: string;
 	description: string;
-	price: string;
+	price: number;
 	images: ProductImage[];
 	ratings: ProductRating;
 	comments: ProductComment[];

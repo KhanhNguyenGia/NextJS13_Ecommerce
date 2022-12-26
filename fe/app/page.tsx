@@ -1,8 +1,8 @@
 import mongoose from 'mongoose';
-import Slider from '../components/slider/slider.component';
-import ProductCard from '../components/product-card/product-card.component';
-import { IProduct } from '../interface/product.interface';
-import Product from '../model/product.model';
+import Slider from '@components/slider/slider.component';
+import ProductCard from '@components/product-card/product-card.component';
+import { IProduct } from '@interface/product.interface';
+import Product from '@model/product.model';
 
 const IMAGE_ARRAY = Array.from(Array(5)).map((_, i) => ({
 	src: `https://picsum.photos/id/${i + 1}/900/600`,

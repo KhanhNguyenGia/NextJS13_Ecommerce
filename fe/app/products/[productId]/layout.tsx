@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import BreadCrumbs from '../../../components/breadcrumbs/breadcrumbs.component';
+import BreadCrumbs from '@components/breadcrumbs/breadcrumbs.component';
 
 export interface IProductLayoutProps {
 	children: React.ReactNode;

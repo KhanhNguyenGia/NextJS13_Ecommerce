@@ -1,13 +1,13 @@
 import mongoose from 'mongoose';
-import { IProduct } from '../../../interface/product.interface';
-import ProductCard from '../../../components/product-card/product-card.component';
-import Product from '../../../model/product.model';
+import { IProduct } from '@interface/product.interface';
+import ProductCard from '@components/product-card/product-card.component';
+import Product from '@model/product.model';
 
 const getProducts = async () => {
 	return new Promise<IProduct[]>((resolve, reject) => {
 		mongoose.connect(process.env.MONGODB_URI as string, async () => {
 			mongoose.set('strictQuery', false);
-			const result = await Product.find({}).limit(6);
+			const result = await Product.find({});
 			const products = result.map((doc) => {
 				const product = doc.toObject();
 				product._id = product._id.toString();

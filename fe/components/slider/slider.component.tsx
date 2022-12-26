@@ -15,6 +15,10 @@ export interface ISliderProps {
 	rounded?: boolean;
 }
 
+export const SkeletonSlider = () => (
+	<div className='rounded-lg h-[50vmin] md:h-full bg-gray-500 animate-pulse'></div>
+);
+
 const Slider: FC<ISliderProps> = ({
 	images,
 	showNav = false,
@@ -36,7 +40,7 @@ const Slider: FC<ISliderProps> = ({
 		<div className={`relative w-full ${height} overflow-hidden ${rounded && 'rounded-lg'} group`}>
 			{images.length > 1 && (
 				<div
-					className='absolute top-1/2 -translate-y-1/2 left-3 z-10 border-[12px] border-transparent border-r-white/80 cursor-pointer hover:border-r-white'
+					className='absolute top-1/2 -translate-y-1/2 left-3 z-10 border-[12px] border-transparent border-r-white/80 cursor-pointer hover:border-r-white opacity-0 group-hover:opacity-100 transition-opacity'
 					onClick={onBack}
 				></div>
 			)}
@@ -67,7 +71,7 @@ const Slider: FC<ISliderProps> = ({
 			))}
 			{images.length > 1 && (
 				<div
-					className='absolute top-1/2 -translate-y-1/2 right-3 z-10 border-[12px] border-transparent border-l-white/80 cursor-pointer hover:border-l-white'
+					className='absolute top-1/2 -translate-y-1/2 right-3 z-10 border-[12px] border-transparent border-l-white/80 cursor-pointer hover:border-l-white opacity-0 group-hover:opacity-100 transition-opacity'
 					onClick={onNext}
 				></div>
 			)}
