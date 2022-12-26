@@ -51,7 +51,12 @@ const getFilterProducts = async (filters: string[]) => {
 
 const FilterProductPage = async ({ params: { filters } }: { params: { filters: string[] } }) => {
 	const result = await getFilterProducts(filters);
-	if (!result) return <div>Something went wrong</div>;
+	if (!result)
+		return (
+			<div className='w-full h-full flex justify-center items-center text-xl font-bold'>
+				Incorrect filter method
+			</div>
+		);
 	const { products, totalPages, currentPage } = result;
 	return (
 		<>

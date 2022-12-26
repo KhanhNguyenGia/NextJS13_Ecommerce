@@ -15,7 +15,6 @@ const FilterForm = () => {
 	const onSort = (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		if (!sort || !numberOfItems) return;
-		console.table({ sort, numberOfItems, direction });
 		router.push(`/products/filter/${sort}/${direction}/${numberOfItems}/1`);
 	};
 
@@ -38,7 +37,7 @@ const FilterForm = () => {
 				</div>
 				<div
 					className={`rounded-full text-orange-400 flex items-center justify-center border-2 border-orange-400 w-10 h-10 cursor-pointer p-[6px] hover:opacity-80 transition-all hover:bg-orange-100/50 ${
-						direction === 'desc' && 'rotate-180'
+						direction === 'asc' && 'rotate-180'
 					}`}
 					onClick={() => setDirection(direction === 'asc' ? 'desc' : 'asc')}
 				>

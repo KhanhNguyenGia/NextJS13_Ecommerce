@@ -24,6 +24,7 @@ const Pagination: FC<IPaginationProps> = ({ currentPage = 1, totalPages = 1 }) =
 			<Button
 				type='button'
 				role='primary'
+				className='w-10 h-12'
 				onClick={() => onPageNavigate(currentPage - 1)}
 				disabled={currentPage === 1}
 			>
@@ -35,7 +36,7 @@ const Pagination: FC<IPaginationProps> = ({ currentPage = 1, totalPages = 1 }) =
 					role='primary'
 					variant={currentPage === i + 1 ? 'filled' : 'outlined'}
 					key={`pagination_button_${i}`}
-					className='w-10'
+					className='w-10 h-12'
 					onClick={() => onPageNavigate(i + 1)}
 				>
 					{i + 1}
@@ -44,6 +45,7 @@ const Pagination: FC<IPaginationProps> = ({ currentPage = 1, totalPages = 1 }) =
 			<Button
 				type='button'
 				role='primary'
+				className='w-10 h-12'
 				onClick={() => onPageNavigate(currentPage + 1)}
 				disabled={currentPage === totalPages}
 			>
